@@ -84,18 +84,11 @@ const FeatureCard = ({
   children?: React.ReactNode;
   className?: string;
 }) => {
-
-
-  ;
-};
-
-const FeatureTitle = ({ children }: { children?: React.ReactNode }) => {
   return (
-    <p className="mx-auto max-w-5xl text-left text-xl tracking-tight text-black md:text-2xl md:leading-snug dark:text-white">
-      {children}
-    </p>
+
   );
 };
+
 
 const FeatureDescription = ({ children }: { children?: React.ReactNode }) => {
   return (
