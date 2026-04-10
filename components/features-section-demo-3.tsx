@@ -5,6 +5,11 @@ import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { IconBrandYoutubeFilled } from "@tabler/icons-react";
+import { AnimatePresence,  } from "motion/react"
+
+import { useState } from "react"
+
+
 
 export default function FeaturesSectionDemo() {
   const features = [
@@ -24,7 +29,7 @@ export default function FeaturesSectionDemo() {
       className: "border-b col-span-1 lg:col-span-2 dark:border-neutral-800",
     },
     {
-      title: "Watch our AI on YouTube",
+      title: "Watch our AI on YouTube2",
       description:
         "Whether its you or Tyler Durden, you can get to know about our product on YouTube",
       skeleton: <SkeletonThree />,
@@ -139,29 +144,71 @@ export const SkeletonOne = () => {
   );
 };
 
-export const SkeletonThree = () => {
-  return (
-    <a
-      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
-      target="__blank"
-      className="group/image relative flex h-full gap-10"
-    >
-      <div className="group mx-auto h-full w-full bg-transparent dark:bg-transparent">
-        <div className="relative flex h-full w-full flex-1 flex-col space-y-2">
-          {/* TODO */}
-          <IconBrandYoutubeFilled className="absolute inset-0 z-10 m-auto h-20 w-20 text-red-500" />
-          <img
-            src="https://assets.aceternity.com/fireship.jpg"
-            alt="header"
-            width={800}
-            height={800}
-            className="aspect-square h-full w-full rounded-sm object-cover object-center blur-none transition-all duration-200 group-hover/image:blur-md"
-          />
+export const SkeletonThree  = () => {
+
+
+    const [isVisible, setIsVisible] = useState(true)
+
+
+    return (
+        <div style={container}>
+            <AnimatePresence initial={false}>
+                {isVisible ? (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        style={box}
+                        key="box"
+                    />
+                ) : null}
+            </AnimatePresence>
+            <motion.button
+                style={button}
+                onClick={() => setIsVisible(!isVisible)}
+                whileTap={{ y: 1 }}
+            >
+                {isVisible ? "Hide" : "Show"}
+            </motion.button>
         </div>
-      </div>
-    </a>
-  );
-};
+    )
+}
+
+/**
+ * ==============   Styles   ================
+ */
+
+const container: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    width: 100,
+    height: 160,
+    position: "relative",
+}
+
+const box: React.CSSProperties = {
+    width: 100,
+    height: 100,
+    backgroundColor: "#0cdcf7",
+    borderRadius: "10px",
+}
+
+const button: React.CSSProperties = {
+    backgroundColor: "#0cdcf7",
+    borderRadius: "10px",
+    padding: "10px 20px",
+    color: "#0f1115",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+}
+
+
+
+
+
+
 
 
 
@@ -189,10 +236,4 @@ export const SkeletonFour = () => {
     </a>
   );
 };
-
-
-
-
-
-
 
